@@ -1,0 +1,13 @@
+.header
+{
+    background: lightgreen;
+    padding: 12px;
+}
+
+.header__title
+{
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-size: 24px;
+}

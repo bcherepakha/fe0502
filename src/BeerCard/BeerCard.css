@@ -1,0 +1,16 @@
+.beer-card
+{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #000;
+    padding: 12px;
+}
+
+.beer-card__image
+{
+    flex: 0 0 90px;
+    min-height: 90px;
+    background: transparent center no-repeat;
+    background-size: contain;
+    margin-right: 12px;
+}

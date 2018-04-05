@@ -3,10 +3,12 @@ import React from 'react';
 // import PromiseXHR from '../i/XHR/PromiseXHR.js';
 import iFetch from '../i/XHR/iFetch';
 import BeerCard from '../BeerCard/BeerCard';
+import AppStore from '../Flux/AppStore';
 
-export default class BeerList extends React.Component {
+export default class BeerList extends React.PureComponent {
     state = {
-        beerList: []
+        beerList: [],
+        favourites: AppStore.favourites
     }
 
     componentWillMount() {
@@ -30,6 +32,16 @@ export default class BeerList extends React.Component {
         })
         .then(this.getBeerSuccess)
         .catch(this.getBeerError);
+
+        AppStore.bind('favorites-update', this.updateFavourites);
+    }
+
+    componentWillUnmount() {
+        AppStore.unbind('favorites-update', this.updateFavourites);
+    }
+
+    updateFavourites = () => {
+        this.setState({favourites: AppStore.favourites});
     }
 
     getBeerSuccess = data => {
@@ -41,7 +53,8 @@ export default class BeerList extends React.Component {
     }
 
     render() {
-        const {searched} = this.props;
+        const {searched} = this.props,
+            {favourites} = this.state;
         let {beerList} = this.state;
 
         if (searched) {
@@ -52,9 +65,11 @@ export default class BeerList extends React.Component {
             {beerList.map(beerInfo =>
                 <BeerCard
                     key={beerInfo.id}
+                    id={beerInfo.id}
                     image={beerInfo.image_url}
                     title={beerInfo.name}
-                    description={beerInfo.description}/>)}
+                    description={beerInfo.description}
+                    favourite={favourites[beerInfo.id]}/>)}
         </div>;
     }
 }

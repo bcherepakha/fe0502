@@ -14,3 +14,37 @@
     background-size: contain;
     margin-right: 12px;
 }
+
+.beer-card__body
+{
+    position: relative;
+    flex: 1 1 auto;
+}
+
+.beer-card__favourites
+{
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    width: 36px;
+    height: 36px;
+
+    cursor: pointer;
+}
+
+.beer-card__favourites-icon
+{
+    width: 100%;
+    height: 100%;
+
+    stroke: #000;
+    fill: #fff;
+}
+
+.beer-card__favourites-icon--active
+{
+    stroke: #990;
+    fill: #ff0;
+}

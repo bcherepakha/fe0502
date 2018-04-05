@@ -2,6 +2,8 @@
 {
     background: lightgreen;
     padding: 12px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header__title
@@ -10,4 +12,15 @@
     padding: 0;
     color: #000;
     font-size: 24px;
+}
+
+.header__link
+{
+    text-decoration: none;
+}
+
+.header__link--active
+{
+    color: #fff;
+    border-bottom: 2px solid #fff;
 }

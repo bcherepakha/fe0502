@@ -7,10 +7,26 @@ const iDispatcher = new Dispatcher();
 
 export default {
     iDispatcher,
-    addToFavorites: function(id) {
+    loaderShow: function() {
         iDispatcher.dispatch({
-            eventName: 'addToFavorites',
-            id
+            eventName: 'loaderShow'
+        });
+    },
+    loaderHide: function() {
+        iDispatcher.dispatch({
+            eventName: 'loaderHide'
+        });
+    },
+    loadBeerList: function() {
+        iDispatcher.dispatch({
+            eventName: 'loadBeerList'
+        });
+    },
+    toggleFavorites: function(id, isFavour) {
+        iDispatcher.dispatch({
+            eventName: 'toggleFavorites',
+            id,
+            isFavour
         });
     }
 };

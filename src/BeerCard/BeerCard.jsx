@@ -2,7 +2,7 @@ import React from 'react';
 import './BeerCard.css';
 import AppActions from '../Flux/AppActions';
 
-const toggleFavourites = id => () => AppActions.addToFavorites(id);
+const toggleFavourites = (id, isFavour) => () => AppActions.toggleFavorites(id, isFavour);
 
 export default function BeerCard(props) {
     const {image, title, description, id, favourite} = props;

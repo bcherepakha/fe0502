@@ -1,55 +1,34 @@
 import React from 'react';
-// import ixhr from '../i/XHR/ixhr.js';
-// import PromiseXHR from '../i/XHR/PromiseXHR.js';
-import iFetch from '../i/XHR/iFetch';
 import BeerCard from '../BeerCard/BeerCard';
 import AppStore from '../Flux/AppStore';
+import AppActions from '../Flux/AppActions';
 
 export default class BeerList extends React.PureComponent {
     state = {
-        beerList: [],
+        beerList: AppStore.beerList,
         favourites: AppStore.favourites
     }
 
     componentWillMount() {
-        // ixhr({
-        //         method: 'GET',
-        //         url: 'https://api.punkapi.com/v2/beers'
-        //     },
-        //     this.getBeerSuccess,
-        //     this.getBeerError);
-
-        // PromiseXHR({
-        //     method: 'GET',
-        //     url: 'https://api.punkapi.com/v2/beers'
-        // })
-        // .then(this.getBeerSuccess)
-        // .catch(this.getBeerError)
-
-        iFetch({
-            method: 'GET',
-            url: 'https://api.punkapi.com/v2/beers'
-        })
-        .then(this.getBeerSuccess)
-        .catch(this.getBeerError);
+        if (!AppStore.beerList.length) {
+            AppActions.loadBeerList();
+        }
 
         AppStore.bind('favorites-update', this.updateFavourites);
+        AppStore.bind('beer-list-update', this.updateBeerList);
     }
 
     componentWillUnmount() {
         AppStore.unbind('favorites-update', this.updateFavourites);
+        AppStore.unbind('beer-list-update', this.updateBeerList);
+    }
+
+    updateBeerList = () => {
+        this.setState({beerList: AppStore.beerList});
     }
 
     updateFavourites = () => {
         this.setState({favourites: AppStore.favourites});
-    }
-
-    getBeerSuccess = data => {
-        this.setState({beerList: data});
-    }
-
-    getBeerError = response => {
-        console.log({response});
     }
 
     render() {

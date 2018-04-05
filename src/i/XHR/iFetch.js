@@ -18,13 +18,18 @@
  *                                              при коде 30x (следовать редиректу) или
  *                                              'error' для интерпретации редиректа как ошибки.
  */
+
+import AppActions from '../../Flux/AppActions';
+
 export default function iFetch(params) {
     const {url, ...options} = params;
 
+    AppActions.loaderShow();
     return fetch(url, options)
             .then(response => {
                 // console.log(response.status, {response});
 
+                AppActions.loaderHide();
                 return response.json();
             });
 }

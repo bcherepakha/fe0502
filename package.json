@@ -18,5 +18,13 @@
   },
   "devDependencies": {
     "json-server": "^0.12.1"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:3001/",
+      "pathRewrite": {
+        "^/api": "/"
+      }
+    }
   }
 }
